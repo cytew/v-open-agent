@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- 원본 미디어와 자격증명이 백업으로 유출되지 않도록 allowBackup을 비활성화한다 -->
+    <application
+        android:allowBackup="false"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <!-- 사용자가 보이는 화면에서 명시적으로 세션을 시작한다 (GATE-C, 8절) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+

@@ -1,0 +1,22 @@
+plugins {
+    alias(libs.plugins.kotlin.jvm)
+}
+
+kotlin {
+    jvmToolchain(17)
+}
+
+dependencies {
+    api(project(":protocol"))
+    implementation(libs.kotlinx.coroutines.core)
+
+    testImplementation(project(":test-support"))
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.kotlinx.coroutines.test)
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
