@@ -40,7 +40,7 @@
 | TASK-15 | SQLite 메타데이터 저장 | DAT-01, DAT-02 | `apps/server/src/voa/storage/sqlite.py` (§8.1), 로그 포매터 (§8.2) | 4개 테이블 CRUD, `PRAGMA table_info`로 BLOB/허용 외 컬럼 없음 검사, 보존 기간 삭제, 로그 허용 키 외 필드 제거 | 03 | DONE |
 | TASK-15A | 의존성 라이선스 등록부 검증 | DAT-05, NFR-04 | `apps/server/tests/test_dependency_registry.py`, `02-technical-specification.md` §9 | `apps/server/pyproject.toml` 직접 의존성이 등록부에 누락되면 실패, AGPL/NC/비공개 API 의무 항목이 기본 설치에 있으면 실패 | 01 | DONE |
 
-TASK-15 검증 (2026-11-10): 네트워크 차단 Docker 개발 컨테이너에서 `pytest -q tests/storage` 44 passed. `src/voa/storage`, `tests/storage` 범위의 ruff lint/format 통과, mypy는 None 검사 보완 후 동일 대상 1회 재검사 통과. 사용자 제한 검증 규칙에 따라 전체 `scripts/check.sh`는 미실행. 서버 시작 시/시간별 `purge_expired` 호출과 `JsonLogFormatter` 연결은 Stage B 서버 조립 시 수행한다.
+TASK-15 검증 (2026-11-10): 네트워크 차단 Docker 개발 컨테이너에서 `pytest -q tests/storage` 44 passed. `src/voa/storage`, `tests/storage` 범위의 ruff lint/format 통과, mypy는 None 검사 보완 후 동일 대상 1회 재검사 통과. 이후 사용자가 전체 회귀 검증을 요청하여 `scripts/check.sh`를 120초 상한으로 1회 실행했고, ruff lint/format, mypy 35개 파일, pytest 216개가 모두 통과했다. 실제 서버 연결 검증은 `voa.server`에 API 앱과 실행 진입점이 아직 없어 수행할 수 없다. 서버 시작 시/시간별 `purge_expired` 호출과 `JsonLogFormatter` 연결은 Stage B 서버 조립 시 수행한다.
 
 **Stage A 게이트**: TASK-01–15A가 모두 DONE이고, T-R01/02/03/04/08/12/15와 INV-01–10이 통과해야 한다. `python -m voa.replay contracts/fixtures/scenarios/uc01_obstacle.jsonl --expected ...`가 exit 0이어야 한다.
 
